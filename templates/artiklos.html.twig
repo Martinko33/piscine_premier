@@ -1,0 +1,20 @@
+{% extends "base_artiklos.html.twig" %}
+{% block title %}
+    Magnifique articles
+{% endblock title %}
+
+
+{% block main %}
+    <article class="article">
+        {% for artikl in artiklos %}
+            <div class="container_article">
+                <a href="{{ path("display_artikl",{'id' : artikl.id}) }}">
+                    <img src="{{ artikl.image }}" alt="{{ artikl.title }}" class="image" >
+                    <h2>{{ artikl.title }}</h2>
+                    <p>{{ artikl.content }}</p>
+                    <span>{{ artikl.createdAt |date("F jS \\a\\t g:ia") }}</span>
+                </a>
+            </div>
+        {% endfor %}
+    </article>
+{% endblock main %}

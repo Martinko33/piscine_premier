@@ -1,0 +1,18 @@
+{% extends "base_artiklos.html.twig" %}
+{% block title %}
+    Super article
+{% endblock %}
+
+
+{% block main %}
+    <article class="element_article">
+        <div class="container_element_article">
+            <a href="{{ path("page_acceuil") }}">
+                <img src="{{ artikl.image }}" alt="article" class="align image">
+                <h2 class="align">{{ artikl.title }}</h2>
+                <p class="align"> {{ artikl.content }}</p>
+                <span>{{ artikl.createdAt |date("F jS \\a\\t g:ia") }}</span>
+            </a>
+        </div>
+    </article>
+{% endblock main %}

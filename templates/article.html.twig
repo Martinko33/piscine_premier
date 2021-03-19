@@ -1,0 +1,17 @@
+{% extends "base.html.twig" %}
+{% block title %}
+    Super article
+{% endblock %}
+
+
+{% block main %}
+    <article class="element_article">
+            <div class="container_element_article">
+                <a href="{{ path("list_articles") }}">
+                <img src="{{ article.image }}" alt="article" class="align" >
+                <h2 class="align">{{ article.title }}</h2>
+                <p class="align"> {{ article.description }}</p>
+                </a>
+            </div>
+    </article>
+{% endblock main %}

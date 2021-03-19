@@ -1,0 +1,20 @@
+{% extends "base_artiklos.html.twig" %}
+
+{% block title %}
+    Page acceuil
+{% endblock title %}
+
+
+{% block main %}
+    <article class="article">
+        {% for deux in deux_artiklos %}
+            <div class="container_article">
+
+                    <img src="{{ deux.image }}" alt="{{ deux.title }}" class="image" >
+                    <h2>{{ deux.title }}</h2>
+                    <p>{{ deux.content }}</p>
+                    <span>{{ deux.createdAt |date("F jS \\a\\t g:ia") }}</span>
+            </div>
+        {% endfor %}
+    </article>
+{% endblock main %}
