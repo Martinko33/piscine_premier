@@ -15,6 +15,9 @@
     <div class="logo">
         <img src="https://st.depositphotos.com/2400497/2931/v/600/depositphotos_29310837-stock-illustration-trash-can.jpg" alt="logo" class="img">
     </div>
+    <form action="{{ path("search_artiklos")  }}" class="form">
+        <input type="search" id="site-search" name="search" placeholder="search">
+    </form>
     <ul class="list_menu">
         <li><a href="{{ path("list_artiklos") }}">Articles</a></li>
         <li>Inscriptions</li>

@@ -6,6 +6,7 @@ namespace App\Controller;
 // mes chemin (namespace) pour annotation route , methode repository ( find, findbyone, findall)
 use App\Repository\ArticleRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class ArtiklosController extends AbstractController
@@ -51,5 +52,26 @@ class ArtiklosController extends AbstractController
         return $this->render('acceuil.html.twig',[
             "deux_artiklos" => $deux_artiklos
         ]);
+    }
+
+    /**
+     * @Route("/search", name="search_artiklos")
+     */
+    public function searchArtiklos(Request $request, ArticleRepository $articleRepository)
+    {
+        // je fais requete query quelle me recoupere dans mon input recherche le mot que utilisateur ecris
+        // je utilise la methode get pour recoupere ca de URL
+        $search = $request->query->get('search');
+        // je recouper dans ma variabla valeur de $search qui a passe par la function searchByTerm
+        // quelle se trouve dans Repository-> articlerepository 
+        $artiklos = $articleRepository->searchByTerm($search);
+
+        // je envoie ma class vers html.twig avec ma variable $artiklos
+        return $this->render('artiklos.html.twig', [
+            'artiklos' => $artiklos
+        ]);
+
+
+
     }
 }
