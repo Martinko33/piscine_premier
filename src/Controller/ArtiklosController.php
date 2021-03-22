@@ -63,11 +63,11 @@ class ArtiklosController extends AbstractController
         // je utilise la methode get pour recoupere ca de URL
         $search = $request->query->get('search');
         // je recouper dans ma variabla valeur de $search qui a passe par la function searchByTerm
-        // quelle se trouve dans Repository-> articlerepository 
+        // quelle se trouve dans Repository-> articlerepository
         $artiklos = $articleRepository->searchByTerm($search);
 
         // je envoie ma class vers html.twig avec ma variable $artiklos
-        return $this->render('artiklos.html.twig', [
+        return $this->render('search.html.twig', [
             'artiklos' => $artiklos
         ]);
 
