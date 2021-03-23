@@ -1,19 +1,35 @@
 <?php
 
-namespace App\Controller\admin;
+namespace App\Controller\Admin;
 
 use App\Entity\Article;
+use App\Repository\ArticleRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
 class ArticlesController extends AbstractController
 {
+
+    /**
+     * @Route("/admin/articles", name="admin_list_articles")
+     */
+
+    public function listArticles(ArticleRepository $articleRepository)
+    {
+        $articles = $articleRepository->findAll();
+
+        return $this->render('admin_articles.html.twig', [
+            'articles' => $articles
+        ]);
+    }
+
+
     //je cree mon chemin pour admin
     /**
-     * @Route ("/admin/articles/insert", name="admin_article")
+     * @Route("/admin/articles/insert", name="admin_insert_article")
      */
-    // je cree ma function ou je utilise entitymanager ( monsieur qui gere tout mes entites
+    // je cree ma method ou je utilise entitymanager ( monsieur qui gere tout mes entites) on fait autowire EntityManagerInterface $entityManager
     public function adminArticleInsert(EntityManagerInterface $entityManager)
     {
 
@@ -30,13 +46,46 @@ class ArticlesController extends AbstractController
         $entityManager->persist($articles);
         $entityManager->flush($articles);
 
-        return $this-> render("admin_articles.html.twig");
+        return $this-> render("admin_insert_articles.html.twig");
+
+    }
+
+    /**
+     * @Route("/admin/articles/update/{id}", name="admin_update_article")
+     */
+    public function updateArticles(EntityManagerInterface $entityManager, ArticleRepository $articleRepository, $id)
+    {
+        $article = $articleRepository->find($id);
+
+        $article->setTitle("Super sport floorball");
+        $article->setContent("Sport dans le halle qui est similaire au hockey sur glace");
+
+        $entityManager->flush($article);
+
+        return $this-> render("admin_update_articles.html.twig");
+
+    }
+
+    /**
+     * @Route("/admin/articles/delete/{id}", name="admin_delete_article")
+     */
+    public function deleteArticles(EntityManagerInterface $entityManager, ArticleRepository $articleRepository, $id)
+    {
+        $article = $articleRepository->find($id);
+
+        $entityManager->remove($article);
+        $entityManager->flush($article);
+
+        $articles = $articleRepository->findAll();
+
+        return $this->render('admin_articles.html.twig', [
+            'articles' => $articles
+        ]);
+
+        //return $this-> render("admin_delete_articles.html.twig");
 
     }
 
 
 
-
 }
-
-

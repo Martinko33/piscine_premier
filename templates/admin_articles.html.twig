@@ -1,7 +1,22 @@
-{% extends "base.html.twig" %}
-
+{% extends "base_artiklos.html.twig" %}
+{% block title %}
+    Magnifique articles
+{% endblock title %}
 
 
 {% block main %}
-    <p>ton article etait bien enregistre</p>
+    <article class="article">
+        {% for article in articles %}
+            <div class="container_article">
+                <a href="{{ path("display_artikl",{'id' : article.id}) }}">
+                    <img src="{{ article.image }}" alt="{{ article.title }}" class="image" >
+                    <h2>{{ article.title }}</h2>
+                    <p>{{ article.content }}</p>
+                    <span>{{ article.createdAt |date("F jS \\a\\t g:ia") }}</span>
+                </a>
+                <br>
+                <a href="{{ path("admin_delete_article",{"id" :article.id}) }}">Delete article</a>
+            </div>
+        {% endfor %}
+    </article>
 {% endblock main %}
