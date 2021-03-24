@@ -8,12 +8,18 @@
     <article class="article">
         {% for article in articles %}
             <div class="container_article">
+                {# j'ai fais join avec deux table dans la entity articles et ici je le rappel par son nom #}
+                {% if article.category %}
+                    <h2>{{ article.category.title }}</h2>
+                {% endif %}
                 <a href="{{ path("display_artikl",{'id' : article.id}) }}">
                     <img src="{{ article.image }}" alt="{{ article.title }}" class="image" >
                     <h2>{{ article.title }}</h2>
                     <p>{{ article.content }}</p>
                     <span>{{ article.createdAt |date("F jS \\a\\t g:ia") }}</span>
                 </a>
+
+
                 <br>
                 <a href="{{ path("admin_delete_article",{"id" :article.id}) }}">Delete article</a>
             </div>

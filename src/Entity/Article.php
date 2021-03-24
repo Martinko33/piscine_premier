@@ -42,6 +42,14 @@ class Article
      */
     private $is_published;
 
+    // je join par ManyToOne category avec article, je suis dans entity\article( faut mettre articles) du coup la methode manyToOne c'est plusier article (many) peut avoir un category(one) , en plus manytoone avec target\entity va faire foreign key direct a mes category du coup category_id
+    // inversedBy est pour cree lien avec entity que je veux joint, dans quelle entity je suis je l'appelle et si j'ai ManyToOne je fais inversedBY, quand j'ai OneToMany je fais mappedBy
+    // oublie pas faire getter et setter
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="articles")
+     */
+    private $category;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -105,5 +113,21 @@ class Article
         $this->is_published = $is_published;
 
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+    /**
+     * @param mixed $category
+     */
+    public function setCategory($category): void
+    {
+        $this->category = $category;
     }
 }

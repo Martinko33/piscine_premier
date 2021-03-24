@@ -76,6 +76,15 @@ a{
     border-radius: 50px;
 }
 
+.flash-message{
+    background-color: black;
+    color: white;
+    border-radius: 40px;
+    padding: 20px;
+    width: 400px;
+    text-align: center;
+}
+
 
 
 

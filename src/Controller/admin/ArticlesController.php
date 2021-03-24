@@ -19,6 +19,8 @@ class ArticlesController extends AbstractController
     {
         $articles = $articleRepository->findAll();
 
+
+
         return $this->render('admin_articles.html.twig', [
             'articles' => $articles
         ]);
@@ -29,7 +31,7 @@ class ArticlesController extends AbstractController
     /**
      * @Route("/admin/articles/insert", name="admin_insert_article")
      */
-    // je cree ma method ou je utilise entitymanager ( monsieur qui gere tout mes entites) on fait autowire EntityManagerInterface $entityManager
+    // je cree ma method ou je utilise entitymanager ( monsieur qui gere tout mes entites) on fait autowire ( que pour les class comme ca on cree pas new etc ) EntityManagerInterface $entityManager
     public function adminArticleInsert(EntityManagerInterface $entityManager)
     {
 
@@ -76,11 +78,14 @@ class ArticlesController extends AbstractController
         $entityManager->remove($article);
         $entityManager->flush($article);
 
-        $articles = $articleRepository->findAll();
+        // ajouter un flash message par addFlash methode qui est cree (est dedans deja) par ArticleRepository
+        $this->addFlash('success', 'Votre article '.$article->getTitle().' etais bien supprime');
 
-        return $this->render('admin_articles.html.twig', [
-            'articles' => $articles
-        ]);
+        // redirect faut utiliser le name de route
+        return $this->redirectToRoute('admin_list_articles');
+
+
+
 
         //return $this-> render("admin_delete_articles.html.twig");
 

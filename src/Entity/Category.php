@@ -37,6 +37,35 @@ class Category
      */
     private $isPublished;
 
+
+    //je fais oneToMany c'est monsieur Richellieu au sql, du coup je peux avoir plusier article ( se que j'appele je vois dans targetEntity du coup article)
+    // dans une category, je suis dans entity category du coup One et j'appelle article Many
+    // faut faire getter et setter
+    /**
+     *
+     * @ORM\OneToMany(targetEntity="App\Entity\Article", mappedBy="category")
+     */
+    private $articles;
+
+    // quand j'ai oneToMany normalment dans Many j'ai plusier truc (ici articles) du coup plusier truc faut faire tableau
+    // je construct tableau (un objet) avec la class arraycollection fait par symfony
+    public function __construct()
+    {
+        $this->articles = new ArrayCollection();
+    }
+
+    public function getArticles()
+    {
+        return $this->articles;
+    }
+
+
+    public function setArticles($articles)
+    {
+        $this->articles = $articles;
+    }
+
+
     /**
      * @return mixed
      */
@@ -116,6 +145,8 @@ class Category
     {
         $this->isPublished = $isPublished;
     }
+
+
 
 
 

@@ -7,7 +7,11 @@
 {% block main %}
     <article class="article">
         {% for artikl in artiklos %}
+
             <div class="container_article">
+                {# j'ai fais join avec deux table dans la entity articles et ici je le rappel par son nom #}
+
+                <h2>{{ artikl.category.title }}</h2>
                 <a href="{{ path("display_artikl",{'id' : artikl.id}) }}">
                     <img src="{{ artikl.image }}" alt="{{ artikl.title }}" class="image" >
                     <h2>{{ artikl.title }}</h2>

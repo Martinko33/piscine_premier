@@ -25,6 +25,15 @@
     </header>
 {# ici je change block  main qui je rappelle ou je repli par autre page quelle demande block main  #}
     <main>
+
+        <div>
+            {% for message in app.flashes('success') %}
+                <div class="flash-notice">
+                    {{ message }}
+                </div>
+            {% endfor %}
+
+        </div>
         {% block main %}{% endblock %}
 
     </main>

@@ -1,0 +1,18 @@
+
+{% extends "base.html.twig" %}
+
+{% block main %}
+    <article class="element_article">
+        <div class="container_element_article">
+            {# je fais boucle pour categorie pour tout sortir #}
+           {% for category in categories %}
+              <h2>{{ category.title}}</h2>
+               {# je fais autre boucle dans boucle pour appelle article quelle sont jointe avec category #}
+               {% for article in category.articles %}
+                   <p>{{ article.title }}</p>
+               {% endfor %}
+            {% endfor %}
+        </div>
+    </article>
+{% endblock main %}
+
