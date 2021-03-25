@@ -85,6 +85,35 @@ a{
     text-align: center;
 }
 
+.full-width{
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+.flex{
+    display: flex;
+}
+.jus-con{
+    justify-content: space-around;
+}
+.aligne{
+    align-self: center;
+    justify-self: center;
+}
+
+.color-navy{
+    color: navy;
+}
+
+.jus-con-cent{
+    justify-content: center;
+}
+
+.widht50{
+    width: 50%;
+}
+
 
 
 

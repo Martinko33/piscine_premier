@@ -1,0 +1,74 @@
+
+{% extends "base.html.twig" %}
+
+{% block main %}
+
+    {{form_start(formCategoryView)}}
+        <div>
+            {{ form_errors(formCategoryView) }}
+        </div>
+
+
+        <div class="container-fluid ">
+            <div class="row justify-content-around mb-5 pt-5 ">
+                <div class="col-5">
+                    <div class="row">
+                        <div class="fw-bold text-center fs-3 col-10">
+                            <h3>{{ form_label(formCategoryView.title) }}</h3>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="border border-4 border border-danger p-0 ">
+                            {{ form_widget(formCategoryView.title, {'attr': {'class': 'full-width','placeholder': 'Faut mettre jolie titre!!'}}) }}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-5">
+                    <div class="row ">
+                        <div class="fw-bold text-center fs-3 col-10">
+                            <h3>{{ form_label(formCategoryView.description) }}</h3>
+                        </div>
+                    </div>
+                    <div class="row ">
+                        <div class="border border-4 border border-danger p-0 ">
+                            {{ form_widget(formCategoryView.description, {'attr': {'class': 'full-width','placeholder': 'STP fait jolie description!!'}}) }}
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="row justify-content-around mb-5">
+                <div class="col-5">
+                    <div class="row">
+                        <div class="fw-bold text-center fs-3 col-10">
+                            <h3>{{ form_label(formCategoryView.createdAt) }}</h3>
+                        </div>
+                    </div>
+                    <div class="row ">
+                        <div class=" ">
+                            {{ form_widget(formCategoryView.createdAt)  }}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-5">
+                    <div class="row">
+                        <div class="fw-bold text-center fs-3 col-10">
+                            <h3>{{ form_label(formCategoryView.isPublished) }}</h3>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="">
+                            {{ form_widget(formCategoryView.isPublished, {'attr': {'class': 'published-bool full-width', 'id': 'check'}}) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="submit-form-article d-flex justify-content-center pb-5">
+                {{ form_widget(formCategoryView.submit) }}
+            </div>
+        </div>
+    {{ form_end(formCategoryView) }}
+
+{% endblock main %}

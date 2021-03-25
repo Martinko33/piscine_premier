@@ -1,0 +1,23 @@
+{% extends "base.html.twig" %}
+
+{% block main %}
+    <article >
+        {% for category in categories %}
+            <div class="flex jus-con">
+                <div class="jus-con-cent widht50">
+                    <h2 class="color-navy align ">{{ category.title }}</h2>
+                    <p class="align ">{{ category.description }}</p>
+                </div>
+                <div class="align jus-con-cent widht50">
+                    <a href="{{ path("admin_categories_update",{"id" :category.id}) }}">Update</a> <br>
+                    <a href="{{ path("admin_categories_delete",{"id" :category.id}) }}">Delete</a>
+                </div>
+            </div>
+        {% endfor %}
+    </article>
+    <div>
+        <a href="{{ path("admin_categories_insert") }}">Ajoute nouvelle categorie</a>
+    </div>
+
+
+{% endblock main %}

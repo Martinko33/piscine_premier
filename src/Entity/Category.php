@@ -3,6 +3,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -48,7 +49,7 @@ class Category
     private $articles;
 
     // quand j'ai oneToMany normalment dans Many j'ai plusier truc (ici articles) du coup plusier truc faut faire tableau
-    // je construct tableau (un objet) avec la class arraycollection fait par symfony
+    // je construct tableau (un objet) avec la class arraycollection fait par doctrine
     public function __construct()
     {
         $this->articles = new ArrayCollection();
