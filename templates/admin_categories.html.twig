@@ -5,6 +5,11 @@
         {% for category in categories %}
             <div class="flex jus-con">
                 <div class="jus-con-cent widht50">
+                    {% if category.image %}
+                        {# je cree lien pour chemin de image qui est stocker dans upload etc
+                        konkatenation en twig se fait avec ~ (tild) et apres recoupere nom de image pour le bien afficher #}
+                    <img src="{{ asset('uploads/images/' ~ category.image) }}" alt="weekend" class="img">
+                    {% endif %}
                     <h2 class="color-navy align ">{{ category.title }}</h2>
                     <p class="align ">{{ category.description }}</p>
                 </div>

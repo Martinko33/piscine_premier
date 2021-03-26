@@ -6,6 +6,7 @@ use App\Entity\Article;
 use App\Entity\Category;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -21,7 +22,11 @@ class ArticleType extends AbstractType
             ->add('title')
             ->add('content')
             ->add('createdAt')
-            ->add('image')
+            ->add('image', FileType::class, [
+                'label' => 'Image',
+                'required' => false,
+                'mapped' => false
+            ])
             ->add('is_published')
             // je peux ajouter autre table ( category) check doc EntityType, utiliser de cote manyToOne car faut sortir que une valeur pas tableau
             ->add('category', EntityType::class, [

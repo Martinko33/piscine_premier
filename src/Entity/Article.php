@@ -35,8 +35,8 @@ class Article
 
     /**
      * @ORM\Column(type="string")
-     * @Assert\Url(message = "Ton URL de image est mort, soit image est moche soit ton url est pas bon",
-     *     protocols={"http","https"})
+     * @Assert\Url(message = "Ton URL de image est mort, soit image est moche soit ton url est pas bon")
+     *
      */
     private $image;
 

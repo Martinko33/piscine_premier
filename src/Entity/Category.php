@@ -41,6 +41,8 @@ class Category
 
     /**
      * @ORM\Column(type="datetime")
+     * @Assert\Type(type="\DateTimeInterface",
+     *     message="Choisir ton date")
      */
     private $createdAt;
 
@@ -48,6 +50,27 @@ class Category
      * @ORM\Column(type="boolean")
      */
     private $isPublished;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $image;
+
+    /**
+     * @return mixed
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * @param mixed $image
+     */
+    public function setImage($image): void
+    {
+        $this->image = $image;
+    }
 
 
     //je fais oneToMany c'est monsieur Richellieu au sql, du coup je peux avoir plusier article ( se que j'appele je vois dans targetEntity du coup article)

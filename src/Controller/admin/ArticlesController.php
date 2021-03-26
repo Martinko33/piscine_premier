@@ -9,6 +9,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 class ArticlesController extends AbstractController
 {
@@ -34,7 +35,10 @@ class ArticlesController extends AbstractController
      * @Route("/admin/articles/insert", name="admin_insert_article")
      */
     // je cree ma method ou je utilise entitymanager ( monsieur qui gere tout mes entites) on fait autowire ( que pour les class comme ca on cree pas new etc ) EntityManagerInterface $entityManager
-    public function adminArticleInsert(EntityManagerInterface $entityManager,Request $request)
+    public function adminArticleInsert(
+        EntityManagerInterface $entityManager,
+        Request $request,
+        SluggerInterface $slugger)
     {
         // je cree variable pour stocke entity article ( pour l'instant vide)
         $article = new Article();
@@ -46,6 +50,29 @@ class ArticlesController extends AbstractController
         // je verifie si mon requete est bien passe bien envoye et si les donne corresponde
         if ($formArticle->isSubmitted() && $formArticle->isValid()) {
             // je recouper tout les donne dans formArticle et je les stock dans variable dans entite article
+
+            $imageFile = $formArticle->get('image')->getData();
+
+            if ($imageFile) {
+                $originalImagename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = $slugger->slug($originalImagename);
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$imageFile->guessExtension();
+
+
+                try {
+                    $imageFile->move(
+                        $this->getParameter('images_directory'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                    // ... handle exception if something happens during file upload
+                }
+
+                // updates the 'brochureFilename' property to store the PDF file name
+                // instead of its contents
+                $article->setImage($newFilename);
+            }
+
             $article = $formArticle->getData();
 
             // je enregistre mon variable entity article dans la bdd
