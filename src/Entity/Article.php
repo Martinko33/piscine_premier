@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\ArticleRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=ArticleRepository::class)
@@ -34,6 +35,8 @@ class Article
 
     /**
      * @ORM\Column(type="string")
+     * @Assert\Url(message = "Ton URL de image est mort, soit image est moche soit ton url est pas bon",
+     *     protocols={"http","https"})
      */
     private $image;
 

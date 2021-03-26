@@ -3,6 +3,8 @@
 namespace App\Form;
 
 use App\Entity\Article;
+use App\Entity\Category;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -21,6 +23,11 @@ class ArticleType extends AbstractType
             ->add('createdAt')
             ->add('image')
             ->add('is_published')
+            // je peux ajouter autre table ( category) check doc EntityType, utiliser de cote manyToOne car faut sortir que une valeur pas tableau
+            ->add('category', EntityType::class, [
+                'class' => Category::class,
+                'choice_label' => 'title'
+        ])
             ->add('submit',SubmitType::class)
         ;
     }

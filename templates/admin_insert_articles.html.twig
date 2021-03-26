@@ -3,6 +3,8 @@
 
 
 {% block main %}
-{# je utilise form ( je pense un methode relier avec twig et symfo et je mettre dans parantheze() render de article>Controler #}
+{# je utilise form ( je pense un methode relier avec twig et symfo et je mettre dans parantheze() render de article>Controler
+form errors j'affiche des error pour ramplisage de formulaire si c'est mal rempli#}
+    {{ form_errors(formArticleView.image) }}
     {{form(formArticleView)}}
 {% endblock main %}

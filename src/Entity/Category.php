@@ -5,6 +5,7 @@ namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
@@ -17,14 +18,24 @@ class Category
      * @ORM\Column(type="integer")
      */
     private $id;
-
+    // assert est pour controler (valider) le input dans formulaire si sont bien remplir etc
     /**
      * @ORM\Column(type="string" , length=255 )
+     * @Assert\NotBlank(message="Tu as oublie remplir champ Title")
+     * @Assert\Length(min = 3,
+     *      max = 250,
+     *      minMessage = "C'est quoi ton titre, fait l'effort et ajoute des lettre ou mots",
+     *      maxMessage = "Halooo tu croix que les gens ont envie lire ton long title"
+     * )
+     * @Assert\Type(type={"alpha"},
+     *       message="Pas des chiffre dans ce title stp")
      */
     private $title;
 
     /**
      * @ORM\Column [type="text", length=1000, nullable=true)
+     * @Assert\NotBlank(message="Tu as oublie remplir champ Description")
+     * @Assert\Type("string")
      */
     private $description;
 

@@ -11,11 +11,17 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\CategoryRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Validator\Constraints as Assert;
 
+/**
+ * route pour class comme ca je doit pas repete la admin/categories dans autre Route
+ * @Route("/admin/categories")
+ */
 class CategoriesController extends AbstractController
 {
     /**
-     * @Route("/admin/categories", name="admin_list_categories")
+     * @Route("/", name="admin_list_categories")
+     *
      */
     public function adminListCategory(CategoryRepository $categoryRepository)
     {
@@ -27,7 +33,7 @@ class CategoriesController extends AbstractController
     }
 
     /**
-     * @Route("/admin/categories/insert", name="admin_categories_insert")
+     * @Route("/insert", name="admin_categories_insert")
      */
     public function adminCategoriesInsert(Request $request, EntityManagerInterface $entityManager)
     {
@@ -51,7 +57,7 @@ class CategoriesController extends AbstractController
     }
 
     /**
-     * @Route("/admin/categories/update/{id}", name="admin_categories_update")
+     * @Route("/update/{id}", name="admin_categories_update")
      */
     public function adminCategoriesUpdate(CategoryRepository $categoryRepository,
                                           $id,
@@ -77,7 +83,7 @@ class CategoriesController extends AbstractController
     }
 
     /**
-     * @Route("/admin/categories/detele/{id}", name="admin_categories_delete")
+     * @Route("/detele/{id}", name="admin_categories_delete")
      */
     public function adminCategorieDelete($id,
                                          CategoryRepository $categoryRepository,
